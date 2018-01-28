@@ -209,12 +209,44 @@
                             </li>
                             <li class="dropdown user user-menu">
                                 <!-- Menu Toggle Button -->
-                                <a href="#" data-toggle="dropdown" aria-expanded="false">
+
+                                 <!-- Authentication Links -->
+                                 
+                                 @if (Auth::guest())
+                                     <li><a href="{{ route('login') }}">Login</a></li>
+                                     <li><a href="{{ route('register') }}">Register</a></li>
+                                 @else
+                                     <li class="dropdown">
+                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                             {{ Auth::user()->name }} <span class="caret"></span>
+                                         </a>
+                                         <ul class="dropdown-menu" role="menu">
+                                             <li><a href="doctor-profile.html"><i class="ti-user"></i> Profile</a></li>
+                                             <li><a href="mailbox.html"><i class="fa fa-fw fa-envelope-o"></i> Inbox</a></li>
+                                             <li><a href="lockscreen.html"><i class="ti-lock"></i> Lookscreen</a></li>
+                                             <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
+                                             <li>
+                                                 <a href="{{ route('logout') }}"
+                                                     onclick="event.preventDefault();
+                                                              document.getElementById('logout-form').submit();">
+                                                              <i class="fa fa-sign-out"></i>
+                                                     Logout
+                                                 </a>
+                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                     {{ csrf_field() }}
+                                                 </form>
+                                             </li>
+                                             
+                                         </ul>
+                                     </li>
+                                 @endif
+
+                                {{--  <a href="#" data-toggle="dropdown" aria-expanded="false">
                                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                     <span class="hidden-xs">Dr. Adrien<i class="fa fa-angle-down pull-right"></i></span>
                                     <!-- The user image in the navbar-->
                                     <img src="admin/resources/img/icons/icon-user.png" class="user-image" alt="User Image">
-                                </a>
+                                </a>  --}}
                                 <ul class="dropdown-menu user-menu animated flipInY">
                                     <li><a href="doctor-profile.html"><i class="ti-user"></i> Profile</a></li>
                                     <li><a href="mailbox.html"><i class="fa fa-fw fa-envelope-o"></i> Inbox</a></li>
